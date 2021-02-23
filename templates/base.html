@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{% block description %}
+        {% endblock description %}">
+
+        {% comment "" %}This meta tag show an image when the site is shared.{% endcomment %}
+
+
+
+        <title>{% block title %}{% endblock title %} | Votaciones Personero</title>
+
+        {% comment %} google fonts: Montserrat {% endcomment %}
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@300&display=swap"
+            rel="stylesheet">
+
+        {% block fontawesome %}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        {% endblock fontawesome %}
+
+        {% comment %} Bootstrap CSS {% endcomment %}
+        {% block bootstrap %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        {% endblock bootstrap %}
+
+        {% block head_links %}
+
+        {% comment %} Custom css {% endcomment %}
+        {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"> {% endcomment %}
+
+        {% endblock head_links %}
+
+    </head>
+
+    <body>
+        {% block super_body_content %}
+        <div class="container">
+            {% block body_content %}
+            {% endblock body_content %}
+        </div>
+
+        {% endblock super_body_content %}
+        {% comment %} JavaScript Bundle with Popper {% endcomment %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+        </script>
+
+
+    </body>
+
+</html>

@@ -26,6 +26,21 @@ SECRET_KEY = '=)_3@e^q(rzusn9xyxq^6eob-1q(x(a3m$6h0t44l(stob09pb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Custom User Model
+AUTH_USER_MODEL = "members.StudentUser"
+
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.AllowAllUsersModelBackend",
+    "members.backends.CaseModelBackend",
+)
+
+# Application definition
+
+ACCOUNT_AUTHENTICATION_METHOD = ("email",)
+
+
+
 ALLOWED_HOSTS = []
 
 
@@ -38,6 +53,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Members stuff
+    'members',
+    # Voting system below
+    'voting',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +75,7 @@ ROOT_URLCONF = 'school.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

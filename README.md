@@ -21,4 +21,6 @@
   - proposal field
   - votes field
 
+- Choices grade model:
+   - name of choice.
 

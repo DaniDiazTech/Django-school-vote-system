@@ -16,7 +16,8 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ("full_name",
-                  "email", "password1", "password2", "")
+                  "email", "password1", "password2", "grade")
+
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
@@ -27,7 +28,18 @@ class SignUpForm(UserCreationForm):
         self.fields["password1"].widget.attrs["class"] = 'form-control bg-white border-left-0 border-md'
         self.fields["password1"].widget.attrs["placeholder"] = 'Password'
 
-        # Password confirmation
+        # # Password confirmation
         self.fields["password2"].widget.attrs["class"] = 'form-control bg-white border-left-0 border-md'
         self.fields["password2"].widget.attrs["placeholder"] = 'Confirm'
+    def mylogin(self):
+        
+        pass
+        # def form_valid(self, form):
+        # to_return = super().form_valid(form)
+        # user = authenticate(
+        #     email=form.cleaned_data["email"],
+        #     password=form.cleaned_data["password1"],
+        # )
+        # login(self.request, user)
+        # return to_return
 
