@@ -4,16 +4,16 @@
 ## TODO
 
 - Authentication system
-    - Match with the name of the student
     - Create account
       - Full name
       - Grade
       - Password
     - IDEAS:
       - Authenticate with email
-      - Authenticate with full name and number
+    - Vote:
+      - show only primary and high school options:
+        - Implement a choice field of primary,and high school
      
-
 
 - Candidate model:
   - Image field
@@ -23,4 +23,8 @@
 
 - Choices grade model:
    - name of choice.
+
+  
+# Advanced:
+  -  Make it beautiful
 

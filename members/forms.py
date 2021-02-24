@@ -5,13 +5,27 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth import views as auth_views
 
+from django.core.validators import RegexValidator
+from django.contrib.auth import authenticate, login
+
+
+MYEMAIL_VALIDATOR = RegexValidator(
+    regex='^est\.[a-zA-ZÀ-ÿ\u00f1\u00d10-9]+@liceocarmelita\.edu\.co$',
+    message='Lo siento ingresa un correo perteneciente al Liceo Carmelita',
+    code='invalid_domain',
+)
+
 
 class SignUpForm(UserCreationForm):
 
-    email = forms.EmailField(required=True, widget=forms.EmailInput(
+    email = forms.EmailField(required=True, validators=[MYEMAIL_VALIDATOR], label="Email", widget=forms.EmailInput(
         attrs={'placeholder': 'Email', 'class': 'form-control bg-white border-left-0 border-md'}))
-    full_name = forms.CharField(max_length=150, widget=forms.TextInput(
-        attrs={'placeholder': 'First name', 'class': 'form-control bg-white border-left-0 border-md'}))
+    full_name = forms.CharField(max_length=150, label="Nombre completo", widget=forms.TextInput(
+        attrs={'placeholder': 'Nombre y apellido', 'class': 'form-control bg-white border-left-0 border-md'}))
+    grade = forms.Select(attrs={
+        'class': 'form-control',
+    })
+
 
     class Meta:
         model = get_user_model()
@@ -26,20 +40,11 @@ class SignUpForm(UserCreationForm):
 
         # First password
         self.fields["password1"].widget.attrs["class"] = 'form-control bg-white border-left-0 border-md'
-        self.fields["password1"].widget.attrs["placeholder"] = 'Password'
+        self.fields["password1"].widget.attrs["placeholder"] = 'Contraseña'
 
         # # Password confirmation
         self.fields["password2"].widget.attrs["class"] = 'form-control bg-white border-left-0 border-md'
-        self.fields["password2"].widget.attrs["placeholder"] = 'Confirm'
-    def mylogin(self):
-        
-        pass
-        # def form_valid(self, form):
-        # to_return = super().form_valid(form)
-        # user = authenticate(
-        #     email=form.cleaned_data["email"],
-        #     password=form.cleaned_data["password1"],
-        # )
-        # login(self.request, user)
-        # return to_return
+        self.fields["password2"].widget.attrs["placeholder"] = 'Confirmación'
 
+        self.fields["grade"].label = 'Tu grado'
+        self.fields["grade"].required = True

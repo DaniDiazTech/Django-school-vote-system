@@ -27,6 +27,15 @@ class SignUpView(generic.CreateView):
     template_name = "registration/singup.html"
     success_url = reverse_lazy('home')
 
+    def form_valid(self, form):
+        to_return = super().form_valid(form)
+        user = authenticate(
+            email=form.cleaned_data["email"],
+            password=form.cleaned_data["password1"],
+        )
+        login(self.request, user)
+        return to_return
+
 
 def logout_view(request):
     logout(request)

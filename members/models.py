@@ -8,6 +8,19 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Used to create the Custom User and it's manager
 class Grade(models.Model):
+    PRIMARY = 1
+    HIGH = 2
+
+    level_choices = (
+        (PRIMARY, 'Primaria'),
+        (HIGH, 'Bachillerato'),
+    )
+
+    level = models.PositiveSmallIntegerField(
+        choices=level_choices,
+        default=PRIMARY,
+    )
+
     grade = models.CharField(max_length=100, unique=True)
 
     def __str__(self):

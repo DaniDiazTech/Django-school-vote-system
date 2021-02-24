@@ -1,5 +1,22 @@
 Hello
-
+<br>
 {% if user.is_authenticated %}
-U are authenticated
+U are authenticated as {{  user.full_name }}
+<br>
+Level: {{user.level}}
+
+<br>
+Grade Level: {{user.grade.level}}
+
+
+{% if user.grade.level == 1 %}
+<br>
+U are of primary
+
+{% elif  user.grade.level == 2 %}
+<br>
+U are from high school
+{% endif %}
+
+
 {% endif %}
