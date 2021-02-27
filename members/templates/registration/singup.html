@@ -10,12 +10,30 @@
 
 <div class="mx-auto fw-bold text-center my-5">
     <h2>Ingresa con tus datos para votar</h2>
+    <p class="text-muted">Arr</p>
 </div>
 
 <div class="form-group">
     <form method="POST" action="">
         {% csrf_token %}
-        {{form|crispy}}
+        <div class="row g-3">
+            <div class="col-12 col-md-8">
+                {{form.full_name|as_crispy_field}}
+            </div>
+            <div class="col-12 col-md-4">
+                {{form.grade|as_crispy_field}}
+            </div>
+            <div class="col-12">
+                {{form.email|as_crispy_field}}
+            </div>
+            <div class="col-12 col-md-6">
+                {{form.password1|as_crispy_field}}
+            </div>
+            <div class="col-12 col-md-6">
+                {{form.password2|as_crispy_field}}
+            </div>
+
+        </div>
 
         <button type="submit" class="btn btn-primary my-4 w-100">Registrar</button>
     </form>

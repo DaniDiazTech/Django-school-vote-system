@@ -15,23 +15,29 @@ MYEMAIL_VALIDATOR = RegexValidator(
     code='invalid_domain',
 )
 
+# email = forms.EmailField(required=True, validators=[MYEMAIL_VALIDATOR], label="Email", widget=forms.EmailInput(
+#     attrs={'placeholder': 'Email', 'class': 'form-control bg-white border-left-0 border-md'}))
+# full_name = forms.CharField(max_length=150, label="Nombre completo", widget=forms.TextInput(
+#     attrs={'placeholder': 'Nombre y apellido', 'class': 'form-control bg-white border-left-0 border-md'}))
+# grade = forms.Select(attrs={
+#     'class': 'form-control',
+# })
+
 
 class SignUpForm(UserCreationForm):
 
     email = forms.EmailField(required=True, validators=[MYEMAIL_VALIDATOR], label="Email", widget=forms.EmailInput(
-        attrs={'placeholder': 'Email', 'class': 'form-control bg-white border-left-0 border-md'}))
+        attrs={'placeholder': 'Email'}))
     full_name = forms.CharField(max_length=150, label="Nombre completo", widget=forms.TextInput(
-        attrs={'placeholder': 'Nombre y apellido', 'class': 'form-control bg-white border-left-0 border-md'}))
+        attrs={'placeholder': 'Nombre y apellido'}))
     grade = forms.Select(attrs={
-        'class': 'form-control',
-    })
 
+    })
 
     class Meta:
         model = get_user_model()
         fields = ("full_name",
                   "email", "password1", "password2", "grade")
-
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
