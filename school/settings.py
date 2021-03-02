@@ -40,6 +40,10 @@ AUTHENTICATION_BACKENDS = (
 ACCOUNT_AUTHENTICATION_METHOD = ("email",)
 
 
+LOGIN_REDIRECT_URL = 'members:signup'
+LOGOUT_REDIRECT_URL = 'members:signup'
+
+
 
 ALLOWED_HOSTS = []
 

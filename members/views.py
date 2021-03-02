@@ -25,7 +25,7 @@ class SignUpView(generic.CreateView):
     """
     form_class = SignUpForm
     template_name = "registration/singup.html"
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('vote:home')
 
     def form_valid(self, form):
         to_return = super().form_valid(form)
@@ -40,4 +40,4 @@ class SignUpView(generic.CreateView):
 def logout_view(request):
     logout(request)
     # Redirect to a success page.
-    return HttpResponseRedirect(reverse_lazy('home'))
+    return HttpResponseRedirect(reverse_lazy('vote:home'))
