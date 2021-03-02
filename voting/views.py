@@ -2,19 +2,32 @@ from django.shortcuts import render
 
 from django.views.generic import TemplateView, DetailView, View
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from django.views.generic import ListView
 
-# from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect
 
-# from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 from .models import *
 
 # Create your views here.
 
-class HomeView(LoginRequiredMixin, ListView):
+
+class Userhasntvoted(UserPassesTestMixin):
+    def test_func(self):
+        return not self.request.user.has_voted 
+    
+    def handle_no_permission(self):
+        '''
+        If the user has voted, redirect  to the already_voted view
+        '''
+        if self.raise_exception:
+            raise PermissionDenied(self.get_permission_denied_message())
+        return HttpResponseRedirect(reverse_lazy('vote:already'))
+
+class HomeView(LoginRequiredMixin, Userhasntvoted,ListView):
     
     model = Candidate
 
@@ -29,10 +42,15 @@ class HomeView(LoginRequiredMixin, ListView):
         return qs.filter(level=self.request.user.grade.level)
     
 
+class AlreadyVoted(TemplateView):
+    template_name = "voting/already_voted.html"
 
-class CandidateDetailView(DetailView):
-    model = Candidate
-    template_name = "voting/details.html"
+
+# class CandidateDetailView(LoginRequiredMixin, DetailView):
+#     model = Candidate
+#     template_name = "voting/details.html"
+#     login_url = 'members:signup'
+#     context_object_name = "candidate"
 
 
 class SuccessView(TemplateView):
@@ -46,6 +64,9 @@ def VoteCandidateView(request, pk):
         return HttpResponseRedirect(reverse('vote:success'))
     else:
         candidate.votes.add(request.user)
+        user = request.user
+        user.has_voted = True
+        user.save()
         return HttpResponseRedirect(reverse('vote:success'))
     return HttpResponseRedirect(reverse('vote:home'))
 

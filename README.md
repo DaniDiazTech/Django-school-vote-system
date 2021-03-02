@@ -24,6 +24,9 @@
 - Choices grade model:
    - name of choice.
 
+- Dashboards:
+    - Candidate votes for high school
+    - Candidate votes for primary
   
 # Advanced:
   -  Make it beautiful
