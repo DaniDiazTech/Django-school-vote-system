@@ -27,7 +27,11 @@ class Userhasntvoted(UserPassesTestMixin):
             raise PermissionDenied(self.get_permission_denied_message())
         return HttpResponseRedirect(reverse_lazy('vote:already'))
 
-class HomeView(LoginRequiredMixin, Userhasntvoted,ListView):
+class CustomLoginRequiredMixin(LoginRequiredMixin):
+    login_url = 'members:signup'
+
+
+class HomeView(CustomLoginRequiredMixin, Userhasntvoted, ListView):
     
     model = Candidate
 
@@ -35,7 +39,6 @@ class HomeView(LoginRequiredMixin, Userhasntvoted,ListView):
 
     template_name = "voting/home.html"
     context_object_name = "candidates"
-    login_url = 'members:signup'
 
     def get_queryset(self):
         qs =  super().get_queryset()
@@ -61,6 +64,9 @@ def VoteCandidateView(request, pk):
     candidate = Candidate.objects.get(id=pk)
 
     if candidate.votes.filter(id=request.user.id).exists():
+        """
+        If the user has already voted, redirect to the success
+        """
         return HttpResponseRedirect(reverse('vote:success'))
     else:
         candidate.votes.add(request.user)

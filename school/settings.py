@@ -63,6 +63,8 @@ INSTALLED_APPS = [
     'members',
     # Voting system below
     'voting',
+    # Results
+    'dashboard',
 ]
 
 

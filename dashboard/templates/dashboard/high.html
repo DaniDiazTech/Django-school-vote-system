@@ -1,0 +1,14 @@
+Bachillerato :)
+
+
+{{candidates}}
+
+<p>
+    {% for candidate in candidates %}
+
+    <p>
+        {{candidate.candidates_name}}
+        {{candidate.number_of_votes}}
+    </p>
+    {% endfor %}
+</p>

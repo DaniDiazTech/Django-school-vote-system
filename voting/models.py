@@ -59,7 +59,10 @@ class Candidate(models.Model):
 
     @property
     def number_of_votes(self):
-        return Candidate.objects.filter(id=self.pk).count()
+        """
+        Returns the votes of a candidate
+        """
+        return self.votes.count()
 
     def __str__(self):
         return self.candidates_name
