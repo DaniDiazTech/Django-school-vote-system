@@ -18,8 +18,10 @@
         {% comment %} google fonts: Montserrat {% endcomment %}
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@300&display=swap"
-            rel="stylesheet">
+        {% block google_fonts %}
+        <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Poppins:ital@1&display=swap" rel="stylesheet">
+        {% endblock google_fonts %}
+
 
         {% block fontawesome %}
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
@@ -35,13 +37,15 @@
         {% block head_links %}
 
         {% comment %} Custom css {% endcomment %}
-        {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"> {% endcomment %}
+        {% comment %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"> {% endcomment %}
 
         {% endblock head_links %}
 
     </head>
 
     <body>
+        {% include "navbar.html" %}
         {% block super_body_content %}
         <div class="container">
             {% block body_content %}

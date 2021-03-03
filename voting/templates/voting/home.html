@@ -1,3 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Vota{% endblock title %}
+
+
+{% block body_content %}
+
 Hello
 <br>
 U are authenticated as {{  user.full_name }}
@@ -33,24 +39,25 @@ You havent voted
 <br>
 {% for candidate in candidates %}
 
-{% if candidate.image %}
-<img src="{{candidate.image.url}}" alt="Candidate image">
-{% endif %}
-<br>
-{{candidate.candidates_name}}
-<br>
-{{candidate.proposal}}
+    {% if candidate.image %}
+    <img src="{{candidate.image.url}}" alt="Candidate image">
+    {% endif %}
+    <br>
+    {{candidate.candidates_name}}
+    <br>
+    {{candidate.proposal}}
 
 
 
-<br>
+    <br>
 
 
-<div class="vote">
-    <form action="{% url 'vote:voting' candidate.pk %}" method="post">
-        {% csrf_token %}
-        <button type="submit" name="post_upvote" value="{{ candidate.pk }}" class="btn btn-danger btn-sm mt-4">Votame
-        </button>
-    </form>
-</div>
+    <div class="vote">
+        <form action="{% url 'vote:voting' candidate.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" name="post_upvote" value="{{ candidate.pk }}" class="btn btn-danger btn-sm mt-4">Votame
+            </button>
+        </form>
+    </div>
 {% endfor %}
+{% endblock body_content %}
