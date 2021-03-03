@@ -6,6 +6,9 @@ from django.views.generic import TemplateView
 
 from django.contrib.auth.mixins import UserPassesTestMixin
 
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
+
 from voting.views import CustomLoginRequiredMixin
 
 # Candidate model
