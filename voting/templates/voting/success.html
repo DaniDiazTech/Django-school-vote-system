@@ -1,1 +1,28 @@
-success you voted :))))
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Ya has votado{% endblock title %}
+
+
+{% block super_body_content %}
+
+<div class="vote-wrapper">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-center">
+            <div class="my-5">
+                <h1 class="fw-bold">
+                    Listo! Ya has votado a tu candidato
+                </h1>
+                <p class="d-flex justify-content-center">
+                    Ya puedes cerrar esta página
+                </p>
+            </div>
+        </div>
+        <div class="py-3 d-flex justify-content-center">
+            <img src="{% static 'images/voted.svg' %}" alt="Already voted" class="img-fluid already-img">
+        </div>
+    </div>
+
+</div>
+{% endblock super_body_content %}

@@ -1,9 +1,24 @@
 <!-- As a heading -->
-<div class="mb-4">
-    <nav class="navbar navbar-light bg-light" style="min-height: 12vh">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 text-muted" style="font-family: 'Poppins', sans-serif; font-size: 1.1rem;">Creado por
+<nav class="navbar navbar-light bg-light my-navbar" style="">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-start">
+            <span class="navbar-brand mb-0 text-muted align-self-start"
+                style="font-family: 'Poppins', sans-serif; font-size: 0.9rem;">Creado por
                 Daniel Diaz 11°</span>
         </div>
-    </nav>
-</div>
+        <div class="d-flex justify-content-end">
+            {% if user.is_staff or user.is_admin %}
+            <span> <a href="{% url 'dashboard:home' %}" class="navbar-brand mb-0 text-muted align-self-start"
+                    style="font-family: 'Poppins', sans-serif; font-size: 0.9rem;"> Votaciones -
+                    Resultados</a></span>
+            {% else %}
+
+            <span class="navbar-brand mb-0 text-muted align-self-start"
+                style="font-family: 'Poppins', sans-serif; font-size: 0.9rem;">Votaciones Liceo carmelita <i
+                    class="fas fa-graduation-cap px-2"></i></span>
+
+            {% endif %}
+        </div>
+    </div>
+    </div>
+</nav>

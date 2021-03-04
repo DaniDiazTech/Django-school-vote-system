@@ -15,23 +15,23 @@ from .models import *
 # Create your views here.
 
 
-class Userhasntvoted(UserPassesTestMixin):
-    def test_func(self):
-        return not self.request.user.has_voted 
+# class Userhasntvoted(UserPassesTestMixin):
+#     def test_func(self):
+#         return not self.request.user.has_voted 
     
-    def handle_no_permission(self):
-        '''
-        If the user has voted, redirect  to the already_voted view
-        '''
-        if self.raise_exception:
-            raise PermissionDenied(self.get_permission_denied_message())
-        return HttpResponseRedirect(reverse_lazy('vote:already'))
+    # def handle_no_permission(self):
+    #     '''
+    #     If the user has voted, redirect  to the already_voted view
+    #     '''
+    #     if self.raise_exception:
+    #         raise PermissionDenied(self.get_permission_denied_message())
+    #     return HttpResponseRedirect(reverse_lazy('vote:already'))
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
     login_url = 'members:signup'
 
 
-class HomeView(CustomLoginRequiredMixin, Userhasntvoted, ListView):
+class HomeView(CustomLoginRequiredMixin,  ListView):
     
     model = Candidate
 

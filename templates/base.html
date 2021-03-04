@@ -14,12 +14,16 @@
 
 
         <title>{% block title %}{% endblock title %} | Votaciones Personero</title>
+        {% comment %} Favicons {% endcomment %}
+
+        <link rel="icon" href="{% static 'images/favicon.png' %}">
 
         {% comment %} google fonts: Montserrat {% endcomment %}
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
         {% block google_fonts %}
-        <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Poppins:ital@1&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Poppins:ital@1&display=swap"
+            rel="stylesheet">
         {% endblock google_fonts %}
 
 
@@ -35,6 +39,7 @@
         {% endblock bootstrap %}
 
         {% block head_links %}
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
         {% comment %} Custom css {% endcomment %}
         {% comment %}
