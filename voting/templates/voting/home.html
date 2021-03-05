@@ -7,6 +7,9 @@
 
 <div class="vote-wrapper">
     {% if not user.has_voted %}
+    <div class="mx-auto text-center py-4">
+        <h1 class="fw-bold">Votaciones {% if user.grade.level == 1 %}Primaria {% else %}Bachillerato{% endif %}</h1>
+    </div>
     <div class="container pt-4">
         <div class="row g-md-5 g-3">
             {% for candidate in candidates %}

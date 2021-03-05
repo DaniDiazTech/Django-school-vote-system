@@ -15,6 +15,10 @@ from os.path import join
 
 from pathlib import Path
 
+import cloudinary
+import cloudinary_storage
+
+
 import django_heroku
 import dj_database_url
 from decouple import config
@@ -28,10 +32,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=)_3@e^q(rzusn9xyxq^6eob-1q(x(a3m$6h0t44l(stob09pb'
+
+SECRET_KEY = config('SECRET_KEY')
+
+# SECRET_KEY = '=)_3@e^q(rzusn9xyxq^6eob-1q(x(a3m$6h0t44l(stob09pb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 # Custom User Model
 AUTH_USER_MODEL = "members.StudentUser"
@@ -51,8 +58,7 @@ LOGIN_REDIRECT_URL = 'members:signup'
 LOGOUT_REDIRECT_URL = 'members:signup'
 
 
-
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "votacionescarmelita.herokuapp.com"]
 
 
 # Application definition
@@ -64,7 +70,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Fancy forms
     'crispy_forms',
+    # Media Cloudinary
+    'cloudinary',
+    'cloudinary_storage',
+
 
     # Members stuff
     'members',
@@ -79,6 +90,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -111,12 +123,19 @@ WSGI_APPLICATION = 'school.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
+
 
 
 # Password validation
@@ -158,19 +177,27 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
 
-STATIC_ROOT = join(BASE_DIR, 'staticfiles')
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    join(BASE_DIR, "static")
+    os.path.join(BASE_DIR, "static"),
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUD_NAME', default=""),
+    'API_KEY': config('API_KEY', default=""),
+    'API_SECRET': config('API_SECRET', default=""),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = join(BASE_DIR, 'media')
-
 
 
 LOGGING = {
@@ -208,3 +235,5 @@ LOGGING = {
 
 DEBUG_PROPAGATE_EXCEPTIONS = True
 COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
+
+django_heroku.settings(locals())

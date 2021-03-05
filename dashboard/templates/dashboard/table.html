@@ -1,0 +1,16 @@
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <th scope="col">Nombre del candidato</th>
+            <th scope="col">Número de votos</th>
+        </thead>
+        <tbody>
+            {% for candidate in candidates %}
+            <tr>
+                <td><span class="fw-bold">{{candidate.candidates_name}}</span></td>
+                <td><span>{{candidate.number_of_votes}}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

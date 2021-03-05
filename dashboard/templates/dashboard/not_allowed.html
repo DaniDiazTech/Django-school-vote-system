@@ -1,1 +1,23 @@
-u r not allowed here!
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}No permitido{% endblock title %}
+
+{% block body_content %}
+
+<div class="d-flex justify-content-center">
+    <div class="py-5">
+        <h1 class="fw-bold">
+            Lo siento no esta permitido que estes aqui
+        </h1>
+    </div>
+</div>
+<div class="d-flex justify-content-center">
+    <div class="py-5 text-align-center mx-auto">
+        <p>Si eres administrativo y deseas acceder a los resultados de la votacion puedes hacerlo teniendo una cuenta
+            administrativa, comunicate con Daniel Diaz del grado 11.</p>
+    </div>
+</div>
+
+
+{% endblock body_content %}
