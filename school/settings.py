@@ -15,13 +15,13 @@ from os.path import join
 
 from pathlib import Path
 
-import cloudinary
-import cloudinary_storage
-
-
+import whitenoise
 import django_heroku
 import dj_database_url
+import cloudinary
+import cloudinary_storage
 from decouple import config
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -70,12 +70,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Fancy forms
-    'crispy_forms',
+
     # Media Cloudinary
     'cloudinary',
     'cloudinary_storage',
 
+    # Fancy forms
+    'crispy_forms',
 
     # Members stuff
     'members',
