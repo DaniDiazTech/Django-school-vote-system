@@ -16,7 +16,8 @@
         <title>{% block title %}{% endblock title %} | Votaciones Personero</title>
         {% comment %} Favicons {% endcomment %}
 
-        <link rel="icon" href="{% static 'images/favicon.png' %}">
+        {% comment %} <link rel="icon" href="{% static 'images/favicon.png' %}"> {% endcomment %}
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
 
         {% comment %} google fonts: Montserrat {% endcomment %}
         <link rel="preconnect" href="https://fonts.gstatic.com">
